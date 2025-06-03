@@ -76,6 +76,10 @@ ssh vm1 "sudo kubeadm init --apiserver-advertise-address 192.168.1.41 --pod-netw
 ssh vm1 "mkdir -p ~/.kube/ && sudo cp /etc/kubernetes/admin.conf ~/.kube/config && sudo chown james:james ~/.kube/config"
 scp vm1:~/.kube/config ~/.kube/config
 
+ssh vm1 "sudo hostnamectl hostname vm1"
+ssh vm2 "sudo hostnamectl hostname vm2"
+ssh vm3 "sudo hostnamectl hostname vm3"
+
 ssh vm2 "sudo kubeadm join 192.168.1.41:6443 --token ... \
         --discovery-token-ca-cert-hash sha256:..."
 ssh vm3 "sudo kubeadm join 192.168.1.41:6443 --token ... \
